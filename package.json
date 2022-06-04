@@ -1,0 +1,23 @@
+{
+  "name": "yaba",
+  "version": "1.0.0",
+  "description": "YABA: yet another blog app",
+  "main": "index.js",
+  "scripts": {
+    "build:frontend": "cd ./frontend && npm run build",
+    "build:backend": "cd ./backend && npm run build",
+    "build": "npm run build:frontend && npm run build:backend",
+    "start": "cd ./backend && npm run start",
+    "dev:backend": "cd ./backend && npm run dev",
+    "dev:frontend": "cd ./frontend && npm start",
+    "db:docker": "cd ./backend && npm run docker",
+    "db:migrate": "cd ./backend && npm run migrate",
+    "db:seed": "cd ./backend && npm run seed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "slush-assignment": "link:"
+  }
+}
