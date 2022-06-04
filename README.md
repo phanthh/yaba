@@ -12,4 +12,4 @@ Submission for Slush recruitment.
 - Migrate with `npm run db:migrate`.
 - Optionally, seed the database with `npm run db:seed`.
 - Start the backend server with `npm run start`.
-- Go to ![http://localhost:3000](http//localhost:3000) to view the application (if `.env.example` is used).
+- Go to ![http://localhost:3000](http://localhost:3000) to view the application (if `.env.example` is used).
