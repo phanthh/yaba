@@ -41,13 +41,14 @@ const Signup: React.FC = () => {
 
     formSchema
       .validate(form)
-      .then((validatedForm) =>
-        fetcher("/api/signup", {
+      .then((validatedForm) => {
+        const { confirmedPassword: _, ...body } = validatedForm;
+        return fetcher("/api/signup", {
           method: "POST",
-          body: validatedForm,
+          body,
           schema: userSchema,
-        })
-      )
+        });
+      })
       .then((user) => {
         window.alert(
           `Congrats ${user.username}! You are signed up! Please proceed to login!`

@@ -31,10 +31,10 @@ const useAuth = () => {
     });
   };
 
-  const logout = () => {
+  const logout = (redirect = "/") => {
     window.localStorage.removeItem("authState");
-    navigate("/");
     setState(initialState);
+    navigate(redirect);
   };
 
   return { ...state, isLogin, login, logout };

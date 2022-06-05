@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { array } from "yup";
 import { fetcher } from "../../../utils/fetcher";
 import { Post, postSchema } from "../../../utils/schemas";
 import useAuth from "../../auth/hooks/useAuth";
 import Page from "../../layout/Page";
+import DeleteProfileForm from "./DeleteProfileForm";
 import EditablePostCard from "./EditablePostCard";
 import NewPostForm from "./NewPostForm";
+import UpdateProfileForm from "./UpdateProfileForm";
 
 const Profile: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -32,7 +36,30 @@ const Profile: React.FC = () => {
 
   return (
     <Page title={`@${username}`}>
-      <NewPostForm setPosts={setPosts} />
+      <div className="profile-button-group">
+        <Link
+          className="btn btn-success"
+          to="/profile/new"
+          style={{ marginLeft: 0 }}
+        >
+          <strong>[+] New Post</strong>
+        </Link>
+        <Link className="btn btn-primary" to="/profile/update">
+          <strong>[@] Update Profile</strong>
+        </Link>
+        <Link
+          className="btn btn-danger"
+          to="/profile/delete"
+          style={{ marginLeft: "auto", marginRight: 0 }}
+        >
+          <strong>[X] Delete Account</strong>
+        </Link>
+      </div>
+      <Routes>
+        <Route path="/new" element={<NewPostForm setPosts={setPosts} />} />
+        <Route path="/update" element={<UpdateProfileForm />} />
+        <Route path="/delete" element={<DeleteProfileForm />} />
+      </Routes>
       <h2 className="section-title">Your Posts</h2>
       <div className="post-searchbar">
         <svg

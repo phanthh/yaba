@@ -3,24 +3,20 @@ import { Link } from "react-router-dom";
 import { InferType, object, string } from "yup";
 import { errorHandler } from "../../../utils/errors";
 import { fetcher } from "../../../utils/fetcher";
-import { Post, postSchema } from "../../../utils/schemas";
+import { userSchema } from "../../../utils/schemas";
 import useAuth from "../../auth/hooks/useAuth";
 
 const formSchema = object({
-  title: string().min(1).max(40).required(),
-  content: string().min(1).required(),
+  email: string().email().required(),
+  password: string().required(),
 });
 
 type FormState = InferType<typeof formSchema>;
 
-type NewPostFormProps = {
-  setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
-};
+const initialState = { email: "", password: "" };
 
-const initialState = { title: "", content: "" };
-
-const NewPostForm: React.FC<NewPostFormProps> = ({ setPosts }) => {
-  const { token } = useAuth();
+const DeleteProfileForm: React.FC = () => {
+  const { token, logout } = useAuth();
   const [form, setForm] = useState<FormState>(initialState);
 
   const handleChange: React.ChangeEventHandler<
@@ -32,17 +28,29 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ setPosts }) => {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+    if (
+      !window.confirm(
+        "Are you sure you want to PERMANENTLY delete your account ?"
+      )
+    ) {
+      return;
+    }
     formSchema
       .validate(form)
       .then((validatedForm) =>
-        fetcher("/api/post/", {
-          method: "POST",
+        fetcher("/api/profile/", {
+          method: "DELETE",
           body: validatedForm,
+          schema: userSchema,
           token,
-          schema: postSchema,
         })
       )
-      .then((newPost) => setPosts((posts) => [...posts, newPost]))
+      .then((_) => {
+        window.alert(
+          "Your account has been deleted. You will be redirected..."
+        );
+        logout("/");
+      })
       .catch((error) => errorHandler(error))
       .finally(() => setForm(initialState));
   };
@@ -51,43 +59,38 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ setPosts }) => {
     <form
       onSubmit={handleSubmit}
       className="form-card"
-      style={{ width: "90%" }}
+      style={{ width: "50%" }}
     >
-      <h3 className="form-title">New Post</h3>
+      <h3 className="form-title">Delete Profile</h3>
       <div className="form-field">
-        <label className="form-label">Title</label>
+        <label className="form-label">Email</label>
         <input
           onChange={handleChange}
           className="form-input"
           type="text"
-          name="title"
-          placeholder="Title"
-          value={form.title}
+          name="email"
+          placeholder="Email"
+          value={form.email}
         />
       </div>
       <div className="form-field">
-        <label className="form-label">Content</label>
-        <textarea
+        <label className="form-label">Password</label>
+        <input
           onChange={handleChange}
-          className="form-textarea"
-          name="content"
-          placeholder="Content"
-          value={form.content}
+          className="form-input"
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={form.password}
         />
       </div>
       <div style={{ display: "flex", justifyContent: "space-evenly" }}>
         <button type="submit" className="btn btn-success">
-          Post!
-        </button>
-        <button
-          type="reset"
-          onClick={() => setForm(initialState)}
-          className="btn btn-primary"
-        >
-          Clear all
+          Confirm!
         </button>
         <Link
           type="reset"
+          onClick={() => setForm(initialState)}
           to="/profile"
           className="btn btn-danger"
           style={{ color: "inherit", textDecoration: "none" }}
@@ -99,4 +102,4 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ setPosts }) => {
   );
 };
 
-export default NewPostForm;
+export default DeleteProfileForm;
