@@ -293,6 +293,10 @@
   margin: auto;
 }
 
+.profile-subtitle {
+  margin-bottom: 1rem;
+}
+
 .profile-button-group {
   display: flex;
   margin-bottom: 1.25rem;

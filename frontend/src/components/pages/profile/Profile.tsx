@@ -14,7 +14,7 @@ import UpdateProfileForm from "./UpdateProfileForm";
 const Profile: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [query, setQuery] = useState("");
-  const { username, token } = useAuth();
+  const { username, token, email } = useAuth();
 
   useEffect(() => {
     fetcher("/api/profile/posts/", {
@@ -36,6 +36,10 @@ const Profile: React.FC = () => {
 
   return (
     <Page title={`@${username}`}>
+      <h4 className="profile-subtitle">
+        <strong>Email: </strong>
+        {email}
+      </h4>
       <div className="profile-button-group">
         <Link
           className="btn btn-success"
