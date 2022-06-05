@@ -27,5 +27,5 @@ app.use(errorHandler);
 app.use(unknownEndpoint);
 
 app.listen(port, () => {
-  console.log(`[server]: Server listening at https://localhost:${port}`);
+  console.log(`[server]: Server listening at http://localhost:${port}`);
 });

@@ -70,7 +70,7 @@ postRouter.post("/", authorization, async (req, res, next) => {
         author: true,
       },
     });
-    res.status(200).json(post);
+    res.status(201).json(post);
   } catch (error) {
     next(error);
   }

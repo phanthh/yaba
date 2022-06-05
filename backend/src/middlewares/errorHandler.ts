@@ -10,9 +10,9 @@ const errorHandler = (
 ) => {
   console.error(error);
   if (error instanceof JsonWebTokenError) {
-    return res.status(400).json({ error: "bad token" });
+    return res.status(401).json({ error: "bad token" });
   } else if (error instanceof UnauthorizedError) {
-    return res.status(400).json({ error: error.message || "unauthorized" });
+    return res.status(401).json({ error: error.message || "unauthorized" });
   } else if (error instanceof BadRequestError) {
     return res.status(400).json({ error: error.message || "bad request" });
   }
