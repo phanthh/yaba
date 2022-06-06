@@ -9,10 +9,7 @@ type ContainerProps = {
 const Container: React.FC<ContainerProps> = ({ children }) => {
   const { themed } = useTheme();
   return (
-    <div
-      className={themed("themer")}
-      style={{ minWidth: "100vw", minHeight: "100vh" }}
-    >
+    <div className={themed("themer")} >
       <div className="container">
         <Header />
         {children}

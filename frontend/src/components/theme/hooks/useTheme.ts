@@ -1,5 +1,5 @@
 import { useContext, useMemo } from "react";
-import { Theme, ThemeContext } from "../context/themeContext";
+import { Theme, ThemeContext, ThemeState } from "../context/themeContext";
 
 const useTheme = () => {
   const context = useContext(ThemeContext);
@@ -24,6 +24,8 @@ const useTheme = () => {
   };
 
   const setTheme = (theme: Theme) => {
+    const newState: ThemeState = { theme };
+    window.localStorage.setItem("themeState", JSON.stringify(newState));
     setState({ theme });
   };
 

@@ -7,6 +7,11 @@
 }
 
 /* Layouts */
+.themer {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
 .container {
   display: flex;
   max-width: 640px;
