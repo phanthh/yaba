@@ -61,7 +61,7 @@ const DeleteProfileForm: React.FC = () => {
       className="form-card"
       style={{ width: "50%" }}
     >
-      <h3 className="form-title">Delete Profile</h3>
+      <h3 className="form-title">Delete Account</h3>
       <div className="form-field">
         <label className="form-label">Email</label>
         <input

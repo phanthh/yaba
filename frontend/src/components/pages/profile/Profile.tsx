@@ -44,19 +44,23 @@ const Profile: React.FC = () => {
         <Link
           className="btn btn-success"
           to="/profile/new"
-          style={{ marginLeft: 0 }}
+          style={{ marginLeft: 0, fontWeight: "bold" }}
         >
-          <strong>[+] New Post</strong>
+          [+] New Post
         </Link>
-        <Link className="btn btn-primary" to="/profile/update">
-          <strong>[@] Update Profile</strong>
+        <Link
+          className="btn btn-primary"
+          style={{ fontWeight: "bold" }}
+          to="/profile/update"
+        >
+          [@] Update Profile
         </Link>
         <Link
           className="btn btn-danger"
           to="/profile/delete"
-          style={{ marginLeft: "auto", marginRight: 0 }}
+          style={{ marginLeft: "auto", marginRight: 0, fontWeight: "bold" }}
         >
-          <strong>[X] Delete Account</strong>
+          [X] Delete Account
         </Link>
       </div>
       <Routes>

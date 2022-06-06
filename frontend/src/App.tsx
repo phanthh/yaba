@@ -7,21 +7,24 @@ import Blog from "./components/pages/blog/Blog";
 import Login from "./components/pages/login/Login";
 import Profile from "./components/pages/profile/Profile";
 import Signup from "./components/pages/signup/Signup";
+import { ThemeProivder } from "./components/theme/context/themeContext";
 
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <Container>
-          <Routes>
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/profile/*" element={<Profile />} />
-            <Route path="/" element={<Blog />} />
-          </Routes>
-        </Container>
-      </AuthProvider>
+      <ThemeProivder>
+        <AuthProvider>
+          <Container>
+            <Routes>
+              <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/profile/*" element={<Profile />} />
+              <Route path="/" element={<Blog />} />
+            </Routes>
+          </Container>
+        </AuthProvider>
+      </ThemeProivder>
     </BrowserRouter>
   );
 }

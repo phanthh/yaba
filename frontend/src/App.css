@@ -1,3 +1,12 @@
+/* Theme */
+.dark {
+  --bg-color: var(--gray-900);
+  --text-color: var(--gray-200);
+  --text-color-active: var(--gray-700);
+  --border-color: var(--gray-700);
+}
+
+/* Layouts */
 .container {
   display: flex;
   max-width: 640px;
@@ -32,9 +41,10 @@
 }
 
 .header {
+  position: relative;
   width: 100%;
   border-radius: var(--border-radius);
-  border: 1px solid var(--gray-200);
+  border: 1px solid var(--border-color);
 }
 
 .header-title {
@@ -43,7 +53,6 @@
 
 .header-subtitle {
   text-align: center;
-  color: var(--gray-500);
 }
 
 .navbar {
@@ -53,54 +62,61 @@
   margin: 1rem 0;
 }
 
-.navbar a {
-  color: var(--gray-700);
-  transition: var(--transition);
-  text-decoration: none;
-}
-
-.navbar a:hover {
-  color: var(--gray-500);
-}
-
 .navbar li {
   border-radius: var(--border-radius);
-  border: 1px solid var(--gray-200);
+  border: 1px solid var(--border-color);
   padding: 0.25rem 0.5rem;
   box-shadow: none;
-  transition: var(--transition);
+}
+
+.navbar li a {
+  color: inherit;
 }
 
 .navbar li:hover {
-  box-shadow: var(--shadow-md);
+  color: var(--text-color-hover);
+  box-shadow: var(--shadow);
 }
 
 .navbar li:active {
+  color: var(--text-color-active);
   box-shadow: none;
 }
 
 .logout-button {
-  all: unset;
-  cursor: pointer;
-  color: var(--gray-700);
+  color: var(--text-color);
 }
 
 .logout-button:hover {
-  color: var(--gray-500);
+  color: var(--text-color-hover);
+}
+
+.logout-button:active {
+  color: var(--text-color-active);
+}
+
+.theme-selector {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  padding: 0.25rem;
+  min-width: 5rem;
+  outline: none;
+  border: 2px dashed var(--border-color);
+  border-radius: var(--border-radius);
 }
 
 .post-searchbar {
-  border: 1px solid var(--gray-200);
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   padding: 0.5rem 0.5rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  transition: var(--transition);
 }
 
 .post-searchbar:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow);
 }
 
 .post-searchbar input {
@@ -108,7 +124,6 @@
 }
 
 .post-searchbar svg {
-  color: var(--gray-500);
   display: inline-block;
   margin-right: 0.5rem;
   height: 1.25rem;
@@ -122,13 +137,11 @@
 
   box-shadow: none;
   border-radius: var(--border-radius);
-  border: 1px solid var(--gray-200);
-
-  transition: var(--transition);
+  border: 1px solid var(--border-color);
 }
 
 .post-card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow);
 }
 
 .post-list {
@@ -142,7 +155,6 @@
 }
 
 .empty-post-list-text {
-  color: var(--gray-500);
   font-weight: normal;
 }
 
@@ -166,7 +178,6 @@
   margin: 0.5rem 0rem;
   font-size: var(--font-size-sm);
   line-height: var(--line-height-sm);
-  color: var(--gray-500);
 }
 
 .editing-post-content {
@@ -185,7 +196,7 @@
 
 .editable-post-button-group {
   margin-top: 1rem;
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid var(--border-color);
   padding-top: 0.25rem;
   width: 100%;
   display: flex;
@@ -195,10 +206,9 @@
 .btn {
   margin: 0.5rem;
   padding: 0.25rem 0.5rem;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow);
   border-radius: var(--border-radius);
-
-  transition: var(--transition);
+  color: var(--gray-700) !important;
 }
 
 .btn-success {
@@ -250,17 +260,15 @@
 
   box-shadow: none;
   border-radius: var(--border-radius);
-  border: 1px solid var(--gray-200);
-
-  transition: var(--transition);
+  border: 1px solid var(--border-color);
 }
 
 .form-card:focus-within {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow);
 }
 
 .form-card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow);
 }
 
 .form-label {
@@ -268,7 +276,7 @@
 }
 
 .form-input {
-  border: 2px dashed var(--gray-500);
+  border: 2px dashed var(--border-color);
   margin: 0.25rem 1rem;
   padding: 0.25rem;
   width: calc(100% - 2rem);
@@ -276,7 +284,7 @@
 }
 
 .form-textarea {
-  border: 2px dashed var(--gray-500);
+  border: 2px dashed var(--border-color);
   margin: 0.25rem 1rem;
   padding: 0.25rem;
   width: calc(100% - 2rem);
@@ -300,9 +308,4 @@
 .profile-button-group {
   display: flex;
   margin-bottom: 1.25rem;
-}
-
-.profile-button-group a {
-  color: inherit;
-  text-decoration: none;
 }
