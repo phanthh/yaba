@@ -6,7 +6,7 @@ Submission for Slush recruitment.
 
 ### Instruction
 
-- Create the environment variable file `.env` in both folder `backend` and `frontend`. An example `.env.example` is provided in each.
+- Create `.env` in both folder `backend` and `frontend`. An example `.env.example` is provided in each.
 - Build the frontend and backend with `npm run build`.
 - Start database container with `npm run db:docker`.
 - Migrate with `npm run db:migrate`.
