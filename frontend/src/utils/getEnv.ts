@@ -1,4 +1,5 @@
 type Env = {
+  readonly PORT: number;
   readonly NODE_ENV: "development" | "production";
   readonly REACT_APP_API_URL: string;
 };

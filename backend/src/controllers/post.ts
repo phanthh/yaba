@@ -6,7 +6,7 @@ import { BadRequestError, UnauthorizedError } from "../utils/errors";
 const prisma = new PrismaClient();
 
 const postRouter = Router();
-// By default, get only published posts, unpublished posts are private
+
 postRouter.get("/", async (req, res, next) => {
   try {
     const posts = await prisma.post.findMany({
@@ -27,7 +27,6 @@ postRouter.get("/", async (req, res, next) => {
   }
 });
 
-// Get a post by id
 postRouter.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -56,7 +55,6 @@ postRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-// Add new post
 postRouter.post("/", authorization, async (req, res, next) => {
   try {
     const { title, content, userId } = req.body;
@@ -67,7 +65,13 @@ postRouter.post("/", authorization, async (req, res, next) => {
         authorId: userId,
       },
       include: {
-        author: true,
+        author: {
+          select: {
+            username: true,
+            email: true,
+            id: true,
+          },
+        },
       },
     });
     res.status(201).json(post);
@@ -76,7 +80,6 @@ postRouter.post("/", authorization, async (req, res, next) => {
   }
 });
 
-// Delete post
 postRouter.delete("/:id", authorization, async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -97,7 +100,13 @@ postRouter.delete("/:id", authorization, async (req, res, next) => {
     const result = await prisma.post.delete({
       where: { id: Number(id) },
       include: {
-        author: true,
+        author: {
+          select: {
+            username: true,
+            email: true,
+            id: true,
+          },
+        },
       },
     });
 
@@ -107,7 +116,6 @@ postRouter.delete("/:id", authorization, async (req, res, next) => {
   }
 });
 
-// Update post
 postRouter.put("/:id", authorization, async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -128,7 +136,15 @@ postRouter.put("/:id", authorization, async (req, res, next) => {
     const result = await prisma.post.update({
       where: { id: Number(id) },
       data: { title, content },
-      include: { author: true },
+      include: {
+        author: {
+          select: {
+            username: true,
+            email: true,
+            id: true,
+          },
+        },
+      },
     });
 
     res.status(200).json(result);

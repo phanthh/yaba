@@ -16,7 +16,13 @@ profileRouter.get("/posts", authorization, async (req, res, next) => {
         authorId: userId,
       },
       include: {
-        author: true,
+        author: {
+          select: {
+            username: true,
+            email: true,
+            id: true,
+          },
+        },
       },
     });
 
